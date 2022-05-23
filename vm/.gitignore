@@ -1,0 +1,11 @@
+# qemu screendumps
+*.ppm
+
+# qemu disks
+*.qcow2
+
+# raw images
+*.iso
+
+# vim swap files
+*.swp
