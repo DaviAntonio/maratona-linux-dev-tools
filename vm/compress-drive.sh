@@ -3,9 +3,6 @@
 readonly DRIVE="$1"
 readonly DRIVE_BACKUP="${DRIVE}_backup"
 
-[ ! -z "${DRIVE}" ] || usage
-[ -f "${DRIVE}" ] && printf "DRIVE=%s\n" "${DRIVE}" || missing_drive "${DRIVE}"
-
 usage()
 {
 	printf "Converts image to QCOW2 and compresses it\n"
@@ -17,9 +14,17 @@ usage()
 
 missing_drive()
 {
-	printf "Drive specified on '%s' was unfound" "${1}"
+	printf "Drive specified on '%s' was not found\n" "${1}"
 	exit 2
 }
+
+[ -n "${DRIVE}" ] || usage
+
+if [ -f "${DRIVE}" ]; then
+	printf "DRIVE=%s\n" "${DRIVE}"
+else
+	missing_drive "${DRIVE}"
+fi
 
 printf "Converting to QCOW2 and compressing %s\n" "${DRIVE}"
 mv "${DRIVE}" "${DRIVE_BACKUP}"
