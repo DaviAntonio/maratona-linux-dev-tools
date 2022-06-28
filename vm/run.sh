@@ -8,18 +8,6 @@ readonly IPV4_NETWORK="192.168.3.0/24"
 readonly IPV4_DHCP_FIRST_ADDR="192.168.3.220"
 readonly P22_FWD="10022"
 
-[ ! -z "${VM_NAME}" ] && printf "VM_NAME=%s\n" "${VM_NAME}" || no_vm_name_error
-[ ! -z "${BIOS_LOCATION}" ] && printf "BIOS_LOCATION=%s\n" "${BIOS_LOCATION}" || no_bios_location_error
-[ ! -z "${FLASHDRIVE_LOCATION}" ] && printf "FLASHDRIVE_LOCATION=%s\n" "${FLASHDRIVE_LOCATION}" || no_flashdrive_location_error
-[ ! -z "${DISK_LOCATION}" ] && printf "DISK_LOCATION=%s\n" "${DISK_LOCATION}" || no_disk_location_error
-[ ! -z "${IPV4_NETWORK}" ] && printf "IPV4_NETWORK=%s\n" "${IPV4_NETWORK}" || no_ipv4_network_error
-[ ! -z "${IPV4_DHCP_FIRST_ADDR}" ] && printf "IPV4_DHCP_FIRST_ADDR=%s\n" "${IPV4_DHCP_FIRST_ADDR}" || no_ipv4_first_addr_error
-[ ! -z "${P22_FWD}" ] && printf "P22_FWD=%s (Port 22 forwarded to %s)\n" "${P22_FWD}" "${P22_FWD}" || no_port_22_forward
-
-[ -f "${BIOS_LOCATION}" ] && printf "BIOS_LOCATION=%s\n" "${BIOS_LOCATION}" || missing_bios "${BIOS_LOCATION}"
-[ -f "${FLASHDRIVE_LOCATION}" ] && printf "FLASHDRIVE_LOCATION=%s\n" "${FLASHDRIVE_LOCATION}" || missing_flashdrive "${FLASHDRIVE_LOCATION}"
-[ -f "${DISK_LOCATION}" ] && printf "DISK_LOCATION=%s\n" "${DISK_LOCATION}" || missing_disk "${DISK_LOCATION}"
-
 # undefined variables
 no_vm_name_error()
 {
@@ -81,6 +69,18 @@ missing_disk()
 	printf "Disk file not found on '%s'\n" "${1}"
 	exit 10
 }
+
+[ ! -z "${VM_NAME}" ] && printf "VM_NAME=%s\n" "${VM_NAME}" || no_vm_name_error
+[ ! -z "${BIOS_LOCATION}" ] && printf "BIOS_LOCATION=%s\n" "${BIOS_LOCATION}" || no_bios_location_error
+[ ! -z "${FLASHDRIVE_LOCATION}" ] && printf "FLASHDRIVE_LOCATION=%s\n" "${FLASHDRIVE_LOCATION}" || no_flashdrive_location_error
+[ ! -z "${DISK_LOCATION}" ] && printf "DISK_LOCATION=%s\n" "${DISK_LOCATION}" || no_disk_location_error
+[ ! -z "${IPV4_NETWORK}" ] && printf "IPV4_NETWORK=%s\n" "${IPV4_NETWORK}" || no_ipv4_network_error
+[ ! -z "${IPV4_DHCP_FIRST_ADDR}" ] && printf "IPV4_DHCP_FIRST_ADDR=%s\n" "${IPV4_DHCP_FIRST_ADDR}" || no_ipv4_first_addr_error
+[ ! -z "${P22_FWD}" ] && printf "P22_FWD=%s (Port 22 forwarded to %s)\n" "${P22_FWD}" "${P22_FWD}" || no_port_22_forward
+
+[ -f "${BIOS_LOCATION}" ] && printf "BIOS_LOCATION=%s\n" "${BIOS_LOCATION}" || missing_bios "${BIOS_LOCATION}"
+[ -f "${FLASHDRIVE_LOCATION}" ] && printf "FLASHDRIVE_LOCATION=%s\n" "${FLASHDRIVE_LOCATION}" || missing_flashdrive "${FLASHDRIVE_LOCATION}"
+[ -f "${DISK_LOCATION}" ] && printf "DISK_LOCATION=%s\n" "${DISK_LOCATION}" || missing_disk "${DISK_LOCATION}"
 
 echo "Booting machine with HDD and packages' disk"
 
