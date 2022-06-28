@@ -62,14 +62,19 @@ echo "Booting machine with HDD and packages' disk"
 
 qemu-system-x86_64 \
 -k pt-br \
--machine accel=kvm \
+-machine type=pc-q35-7.0,accel=kvm \
+-cpu Haswell \
 -m 4G \
 -bios "${BIOS_LOCATION}" \
--drive file="${DISK_LOCATION}",index=0,media=disk \
--drive file="${FLASHDRIVE_LOCATION}",index=1,media=disk \
+-device virtio-scsi-pci,id=scsi0 \
+-drive file="${DISK_LOCATION}",index=0,if=none,media=disk,id=drive-hd0 \
+-device scsi-hd,bus=scsi0.0,drive=drive-hd0,id=hd0,bootindex=0 \
+-drive file="${FLASHDRIVE_LOCATION}",index=1,if=none,media=disk,id=drive-hd1 \
+-device scsi-hd,bus=scsi0.0,drive=drive-hd1,id=hd1,bootindex=1 \
 -boot menu=on \
 -nic none \
 -rtc base=localtime \
--vga qxl \
+-vga virtio \
+-display gtk \
 -monitor stdio \
 -name "${VM_NAME}"

@@ -86,15 +86,20 @@ echo "Booting machine with HDD and removable media"
 
 qemu-system-x86_64 \
 -k pt-br \
--machine accel=kvm \
--m 2G \
+-machine type=pc-q35-7.0,accel=kvm \
+-cpu Haswell \
+-m 4G \
 -bios "${BIOS_LOCATION}" \
--drive file="${IMAGE_LOCATION}",index=0,media=disk \
--drive file="${DISK_LOCATION}",index=1,media=disk \
+-drive file="${IMAGE_LOCATION}",format=raw,if=none,media=cdrom,index=0,id=drive-cd1,readonly=on \
+-device virtio-scsi-pci,id=scsi0 \
+-device scsi-cd,bus=scsi0.0,drive=drive-cd1,id=cd1,bootindex=0 \
+-drive file="${DISK_LOCATION}",format=qcow2,if=none,media=disk,index=1,id=drive-hd1,readonly=off \
+-device scsi-hd,bus=scsi0.0,drive=drive-hd1,id=hd1,bootindex=1 \
 -boot menu=on \
 -netdev user,id=net0,net="${IPV4_NETWORK}",dhcpstart="${IPV4_DHCP_FIRST_ADDR}",hostfwd=tcp::"${P22_FWD}"-:22 \
 -device virtio-net-pci,netdev=net0 \
 -rtc base=localtime,clock=vm \
--vga qxl \
+-vga virtio \
+-display gtk \
 -monitor stdio \
 -name "${VM_NAME}"
