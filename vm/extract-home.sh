@@ -9,7 +9,7 @@ mount '/dev/sda2' '/'
 echo "Copying from '/home/icpc' to 'extracted-home.d/icpc-home.tar'"
 tar-out '/home/icpc' 'extracted-home.d/icpc-home.tar'
 echo "Renaming..."
-!mv 'extracted-home.d/icpc-home.tar' "extracted-home.d/icpc-home_$(date --iso-8601='minutes').tar"
+!mv 'extracted-home.d/icpc-home.tar' "extracted-home.d/$(date --iso-8601='minutes')_icpc-home.tar"
 
 echo ""
 
