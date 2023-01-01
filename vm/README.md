@@ -11,12 +11,12 @@ These scripts need the following packages to be installed on the host's system
 
 |Package         |Version|
 |----------------|-------|
-|qemu-system-x86 |7.0.0  |
-|qemu-utils      |7.0.0  |
-|qemu-system-gui |7.0.0  |
-|qemu-block-extra|7.0.0  |
-|ovmf            |2020.11|
-|libguestfs-tools|1.44.0 |
+|qemu-system-x86 |7.2.0  |
+|qemu-utils      |7.2.0  |
+|qemu-system-gui |7.2.0  |
+|qemu-block-extra|7.2.0  |
+|ovmf            |2022.11|
+|libguestfs-tools|1.48.6 |
 
 The scripts assume that KVM-based accelerated virtualisation is enabled on the
 host machine. This requires a compatible processor and it may require a
