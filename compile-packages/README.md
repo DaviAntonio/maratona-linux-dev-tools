@@ -15,6 +15,22 @@ One of the scripts depends on the `pdg` tool, which can be found in its
 [GitHub](https://github.com/DaviAntonio/pdg) repositories. The aforementioned
 script also depends on Graphviz and the Python 3 interpreter.
 
+Some features depend on havinga valid GLib2 and GVFS installation. They can be
+easily replaced by standard, yet less convenient, tools.
+
+## Dependencies
+
+Without any customisation, the scripts currently depend on:
+- GLib2
+- GVFS
+- pdg
+- GNU Bash
+- Graphviz
+- Debian devscripts
+- Debian dpkg
+- Debian dpkg-dev
+- Debian debhelper
+
 ## The compilation procedures and their outputs
 
 The following steps are necessary to compile the packages. Depending on the
