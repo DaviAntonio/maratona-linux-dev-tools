@@ -74,7 +74,7 @@ qemu-system-x86_64 \
 -boot menu=on \
 -nic none \
 -rtc base=localtime \
--vga virtio \
--display gtk \
+-device virtio-vga-gl \
+-display gtk,gl=on \
 -monitor stdio \
 -name "${VM_NAME}"
