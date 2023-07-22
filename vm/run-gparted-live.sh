@@ -87,7 +87,7 @@ echo "Booting machine with HDD and removable media"
 qemu-system-x86_64 \
 -k pt-br \
 -machine type=pc-q35-7.0,accel=kvm \
--cpu Haswell \
+-cpu Haswell -smp 4 \
 -m 4G \
 -bios "${BIOS_LOCATION}" \
 -drive file="${IMAGE_LOCATION}",format=raw,if=none,media=cdrom,index=0,id=drive-cd1,readonly=on \
