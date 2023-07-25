@@ -76,7 +76,7 @@ Modify the `fstab` file. In order to find the flashdrive's UUID, it needs to be
 mounted and inspected using `guestfish`:
 
 ```
-add flashdrive.qcow
+add flashdrive.qcow2
 run
 blkid /dev/sda1
 ```

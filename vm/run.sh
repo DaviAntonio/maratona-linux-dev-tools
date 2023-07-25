@@ -19,7 +19,7 @@ qemu-system-x86_64 \
 -device virtio-scsi-pci,id=scsi0 \
 -drive file="${DISK_LOCATION}",format=qcow2,if=none,media=disk,index=0,id=drive-hd0,readonly=off \
 -device scsi-hd,bus=scsi0.0,drive=drive-hd0,id=hd0,bootindex=0 \
--drive file="${FLASHDRIVE_LOCATION}",format=qcow,if=none,media=disk,index=1,id=drive-hd1,readonly=on \
+-drive file="${FLASHDRIVE_LOCATION}",format=qcow2,if=none,media=disk,index=1,id=drive-hd1,readonly=on \
 -device scsi-hd,bus=scsi0.0,drive=drive-hd1,id=hd1,bootindex=1 \
 -boot menu=on \
 -netdev user,id=net0,net="${IPV4_NETWORK}",dhcpstart="${IPV4_DHCP_FIRST_ADDR}",hostfwd=tcp::"${P22_FWD}"-:22 \
