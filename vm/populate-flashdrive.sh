@@ -1,6 +1,9 @@
 #!/usr/bin/guestfish -f
 
-add 'flashdrive.qcow2'
+# Ugly hack yet necessary, as guestfish lacks variables
+# Guestfish asks 'sh' to interpret the inline script and will happily try to
+# execute whathever 'sh' sent to stdout
+<!. ./env-vars.sh > /dev/null; echo "add '${FLASHDRIVE_LOCATION}'"
 run
 mount '/dev/sda1' '/'
 
@@ -16,7 +19,7 @@ mkdir '/packages'
 #packages is a directory
 #copy-in 'packages' '/'
 
-#packages is a symbolic link to a directory
+# Packages is a symbolic link to a directory
 <! find packages/ -type f -exec printf "copy-in %s /packages\n" {} \;
 
 echo "Listing '/'"

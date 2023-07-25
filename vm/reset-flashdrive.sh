@@ -1,8 +1,7 @@
 #!/bin/bash
 
-readonly DISK_SIZE="4G"
-readonly FLASHDRIVE_DISK="flashdrive.qcow2"
+source './env-vars.sh'
 
-echo "Creating qcow2 flashdrive '${FLASHDRIVE_DISK}' disk with ${DISK_SIZE}"
-qemu-img create -f qcow2 "${FLASHDRIVE_DISK}" "${DISK_SIZE}"
-virt-format -a "${FLASHDRIVE_DISK}" --partition=gpt --filesystem=ext4
+echo "Creating qcow2 flashdrive '${FLASHDRIVE_LOCATION}' disk with ${FLASHDRIVE_SIZE}"
+qemu-img create -f qcow2 "${FLASHDRIVE_LOCATION}" "${FLASHDRIVE_SIZE}"
+virt-format -a "${FLASHDRIVE_LOCATION}" --partition=gpt --filesystem=ext4

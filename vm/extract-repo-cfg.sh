@@ -1,6 +1,9 @@
 #!/usr/bin/guestfish -f
 
-add 'ubuntu-22.04-initial.qcow2'
+# Ugly hack yet necessary, as guestfish lacks variables
+# Guestfish asks 'sh' to interpret the inline script and will happily try to
+# execute whathever 'sh' sent to stdout
+<!. ./env-vars.sh > /dev/null; echo "add '${DISK_LOCATION}'"
 run
 mount '/dev/sda2' '/'
 

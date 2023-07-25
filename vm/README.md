@@ -39,8 +39,8 @@ Virtual Machine's disk
 - `push-to-home.d`, a directory to place files that will be sent to the home
 directory of the icpc user
 - `push-to-vm`, a directory to place configuration files
-- `link-ubuntu-22.04-desktop-amd64.iso`, a symbolic link to a Ubuntu 22.04
-installation disk
+- `env-vars.sh`, a copy of `env-vars.sh.ex` with the variables that configure
+the virtual machine filled according to your development environment
 
 ## Starting the Virtual Machine up for the first time
 
