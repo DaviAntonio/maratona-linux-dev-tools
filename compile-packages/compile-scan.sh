@@ -4,6 +4,8 @@ scan() {
 	local -r original_dir="$(pwd)"
 	local -r packages_dir="$1"
 
+	printf "Generating '%s'\n" "${packages_dir}/Packages.gz"
+
 	# go into directory
 	cd "$packages_dir" || exit
 
@@ -13,6 +15,5 @@ scan() {
 
 	cd "$original_dir"
 
-	printf "\nDone\n"
 	return 0
 }

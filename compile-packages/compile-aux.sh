@@ -19,23 +19,25 @@ glob_trash() {
 }
 
 cleanup() {
-	# Definitive removal
-	#rm -f -- *.deb
+	if [[ $(command -v gio) != 0 ]]; then
+		# Definitive removal
+		rm -vf -- *.deb
 
-	#rm -f -- *.build
-	#rm -f -- *.buildinfo
-	#rm -f -- *.changes
-	#rm -f -- *.dsc
-	#rm -f -- *.tar.*
+		rm -vf -- *.build
+		rm -vf -- *.buildinfo
+		rm -vf -- *.changes
+		rm -vf -- *.dsc
+		rm -vf -- *.tar.*
+	else
+		# Send to the thrash directory
+		glob_trash ./*.deb
 
-	# Send to the thrash directory
-	glob_trash ./*.deb
-
-	glob_trash ./*.build
-	glob_trash ./*.buildinfo
-	glob_trash ./*.changes
-	glob_trash ./*.dsc
-	glob_trash ./*.tar.*
+		glob_trash ./*.build
+		glob_trash ./*.buildinfo
+		glob_trash ./*.changes
+		glob_trash ./*.dsc
+		glob_trash ./*.tar.*
+	fi
 }
 
 initial_setup() {
