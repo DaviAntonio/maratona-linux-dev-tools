@@ -1,6 +1,6 @@
 # Maratona Linux Development Scripts
 
-## Setup
+## Instructions for setting the test VM up
 
 The scripts are flexible, but they still have requirements in order to be run.
 
@@ -11,12 +11,12 @@ These scripts need the following packages to be installed on the host's system
 
 |Package         |Version|
 |----------------|-------|
-|qemu-system-x86 |7.2.0  |
-|qemu-utils      |7.2.0  |
-|qemu-system-gui |7.2.0  |
-|qemu-block-extra|7.2.0  |
-|ovmf            |2022.11|
-|libguestfs-tools|1.48.6 |
+|qemu-system-x86 |10.0.3 |
+|qemu-utils      |10.0.3 |
+|qemu-system-gui |10.0.3 |
+|qemu-block-extra|10.0.3 |
+|ovmf            |2025.02|
+|libguestfs-tools|1.54.1 |
 
 The scripts assume that KVM-based accelerated virtualisation is enabled on the
 host machine. This requires a compatible processor and it may require a
@@ -52,7 +52,7 @@ The initial images are created by the `reset-*` scripts
 ```
 
 With the drives created, run the initialisation script and install a regular
-Ubuntu 22.04 LTS installation:
+Ubuntu 24.04 LTS installation:
 
 - Language and keyboard layout: English (US)
 - Minimal installation
@@ -66,17 +66,28 @@ Ubuntu 22.04 LTS installation:
 
 ## Configuring a repository
 
-Extract the files from the image
+Extract the files from the image, if you wish to check the default
+configuration: `./extract-repo-cfg.sh`
 
-`./extract-repo-cfg.sh`
+The Maratona Linux local development configuration can be injected on the VM
+disk using the script in `inject-repo-cfg.sh`.
 
-### Setting up automount
+The script will:
+
+- replace the default `fstab` with a custom one
+	- **PLEASE SET UP THE AUTOMOUNT FIRST (SEE BELOW)**
+- add the local repository disk to APT's configuration
+
+The local repository uses the deb822 format as suggested by Ubuntu 24.04 and
+Debian 13.
+
+### Setting the automount up (fstab)
 
 Modify the `fstab` file. In order to find the flashdrive's UUID, it needs to be
 mounted and inspected using `guestfish`:
 
 ```
-add flashdrive.qcow2
+add flashdrive.raw
 run
 blkid /dev/sda1
 ```
@@ -87,14 +98,4 @@ the one found using guestfish:
 ```
 # maratona packages drive
 UUID=replace-by-your-uuid /mnt/maratona-packages ext4 defaults 0 2
-```
-
-### Configure apt
-
-Modify the `sources.list` file extracted form the image. Append the following
-lines to it:
-
-```
-# Local repository for Maratona Linux
-deb [trusted=yes] file:/mnt/maratona-packages/packages ./
 ```

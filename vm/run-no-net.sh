@@ -15,16 +15,18 @@ qemu-system-x86_64 \
 -machine "${MACHINE_CFG}" \
 -cpu "${CPU_MODEL}" -smp "${CPU_NUMBER}" \
 -m "${MACHINE_MEMORY_SIZE}" \
--bios "${BIOS_LOCATION}" \
+-drive file="${BIOS_LOCATION}",format=raw,if=pflash,readonly=on,index=0 \
+-drive file="${UEFI_VARS}",format=raw,if=pflash,index=1 \
 -device virtio-scsi-pci,id=scsi0 \
--drive file="${DISK_LOCATION}",format=qcow2,if=none,media=disk,index=0,id=drive-hd0,readonly=off \
+-drive file="${DISK_LOCATION}",format=raw,if=none,media=disk,index=0,id=drive-hd0,readonly=off \
 -device scsi-hd,bus=scsi0.0,drive=drive-hd0,id=hd0,bootindex=0 \
--drive file="${FLASHDRIVE_LOCATION}",format=qcow2,if=none,media=disk,index=1,id=drive-hd1,readonly=on \
+-drive file="${FLASHDRIVE_LOCATION}",format=raw,if=none,media=disk,index=1,id=drive-hd1,readonly=on \
 -device scsi-hd,bus=scsi0.0,drive=drive-hd1,id=hd1,bootindex=1 \
 -boot menu=on \
 -nic none \
 -rtc base=localtime,clock=vm \
--device virtio-vga-gl \
--display gtk,gl=on \
+-device virtio-balloon \
+-device "${DISPLAY_DEVICE}" \
+-display "${DISPLAY_BACKEND}" \
 -monitor stdio \
 -name "${VM_NO_NET_NAME}"

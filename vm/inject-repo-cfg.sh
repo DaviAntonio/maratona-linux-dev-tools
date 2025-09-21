@@ -12,8 +12,10 @@ mount '/dev/sda2' '/'
 echo "Copying from 'push-to-vm/fstab' to '/etc/fstab'"
 copy-in 'push-to-vm/fstab' '/etc'
 
-echo "Copying from 'push-to-vm/sources.list' to '/etc/apt/sources.list'"
-copy-in 'push-to-vm/sources.list' '/etc/apt'
+# echo "Copying from 'push-to-vm/sources.list' to '/etc/apt/sources.list'"
+# copy-in 'push-to-vm/sources.list' '/etc/apt'
+echo "Copying from 'push-to-vm/maratona-local.sources' to '/etc/apt/sources.list.d'"
+copy-in 'push-to-vm/maratona-local.sources' '/etc/apt/sources.list.d'
 
 echo ""
 

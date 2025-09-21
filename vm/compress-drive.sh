@@ -5,7 +5,7 @@ readonly DRIVE_BACKUP="${DRIVE}_backup"
 
 usage()
 {
-	printf "Converts image to QCOW2 and compresses it\n"
+	printf "Converts image to RAW and compresses it\n"
 	printf "Usage:\tcompress-drive drive-to-compress\n"
 	printf "The image is backed up with a '_backup' suffix\n"
 
@@ -26,10 +26,12 @@ else
 	missing_drive "${DRIVE}"
 fi
 
-printf "Converting to QCOW2 and compressing %s\n" "${DRIVE}"
+printf "Converting to RAW %s\n" "${DRIVE}"
 mv "${DRIVE}" "${DRIVE_BACKUP}"
 sync
-#qemu-img convert -c -p -O qcow2 "${DRIVE_BACKUP}" "${DRIVE}"
-qemu-img convert --salvage -c -p -O qcow2 "${DRIVE_BACKUP}" "${DRIVE}"
-#qemu-img convert -p -O qcow2 "${DRIVE_BACKUP}" "${DRIVE}"
+
+qemu-img convert -p -O raw "${DRIVE_BACKUP}" "${DRIVE}"
+
+# virt-sparsify --format raw --convert raw ubuntu-24.04-initial.raw ubuntu-24.04-initial2.raw
+
 sync

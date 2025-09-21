@@ -12,6 +12,9 @@ mount '/dev/sda2' '/'
 echo "Copying from 'push-to-home.d' to '/home/icpc'"
 copy-in 'push-to-home.d/' '/home/icpc'
 
+echo "Fixing permissions"
+command '/bin/chown --verbose --recursive icpc /home/icpc/push-to-home.d'
+
 echo ""
 
 echo "Unmounting..."

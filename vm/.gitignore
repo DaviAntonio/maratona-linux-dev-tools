@@ -9,6 +9,3 @@
 
 # vim swap files
 *.swp
-
-# VM configurations
-env-vars.sh
